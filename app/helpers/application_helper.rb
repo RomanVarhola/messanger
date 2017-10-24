@@ -6,4 +6,8 @@ module ApplicationHelper
       end
     end
   end
+
+  def unread_messages
+    ShowUnreadMessages.new(current_user).call
+  end
 end

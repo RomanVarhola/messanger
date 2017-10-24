@@ -9,7 +9,7 @@ class Message < ActiveRecord::Base
   after_create :create_or_update_conversation
   
   def only_different_sender_and_receiver
-    errors.add(:receiver,'Receiver is the same as Sender.') if sender_id == receiver_id
+    errors.add(:receiver,'is the same as Sender.') if sender_id == receiver_id
   end 
 
   def create_or_update_conversation

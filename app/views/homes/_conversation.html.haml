@@ -31,7 +31,7 @@
 .send-wrap
   = form_for Message.new do |f|
     = f.hidden_field :sender_id, value: current_user.id
-    = f.hidden_field :receiver_id, value: @conversation.receiver.id, id: 'mess'
+    = f.hidden_field :receiver_id, value: @conversation.other_receiver(current_user), id: 'message'
     = f.hidden_field :body, value: 'Body'
     = f.text_area :description, class: 'form-control', rows: '3'
     .btn-panel

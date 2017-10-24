@@ -3,6 +3,10 @@
     %a.close{"aria-label" => "close", "data-dismiss" => "alert", :href => "#"} ×
     %p#notice= notice
 
+- if unread_messages > 0
+  .alert.alert-danger
+    %p#notice You have #{unread_messages} unread messages
+
 .container
   .row
     .col-lg-3
@@ -25,6 +29,8 @@
             .media.conversation
               %a.pull-left{:href => "#"}
                 = image_tag('1.png', style: "width: 50px; height: 50px;")
+              - if unread_messages > 0
+                %h4.unread-messages.pull-right= unread_messages
               .media-body
                 %h4.media-heading
                 = link_to "#{conversation.receiver.full_name}", conversation_path(conversation), remote: true
