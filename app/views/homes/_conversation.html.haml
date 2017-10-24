@@ -1,0 +1,41 @@
+.msg-wrap
+  Conversation with 
+  %b
+    = @conversation.other_member(current_user)
+  %hr
+  #message-scroll
+    - @conversation.messages.each do |message|
+      - if current_user == message.sender 
+        .media.msg
+          %a.pull-right
+            = image_tag('1.png', style: "width: 40px; height: 40px;")
+          .media-body.alert.alert-success
+            .pull-right
+              = link_to 'x', message_path(message), method: :delete, class: 'btn'
+            %small.pull-right.time
+              %i.fa.fa-clock-o
+                = message.created_at
+            %h5.media-heading= message.sender.full_name
+            %small.col-lg-10= message.description
+      - else
+        .media.msg
+          %a.pull-left
+            = image_tag('1.png', style: "width: 40px; height: 40px;")
+          .media-body.alert.alert-info
+            %small.pull-right.time
+              %i.fa.fa-clock-o
+                = message.created_at
+            %h5.media-heading= message.sender.full_name
+            %small.col-lg-10= message.description
+%hr
+.send-wrap
+  = form_for Message.new do |f|
+    = f.hidden_field :sender_id, value: current_user.id
+    = f.hidden_field :receiver_id, value: @conversation.receiver.id, id: 'mess'
+    = f.hidden_field :body, value: 'Body'
+    = f.text_area :description, class: 'form-control', rows: '3'
+    .btn-panel
+      %a.col-lg-4.text-right.btn.send-message-btn.pull-right{:href => "", :role => "button"}
+        %i.fa.fa-plus
+          = f.submit 'Send Message'
+                

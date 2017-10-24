@@ -1,0 +1,26 @@
+.row
+  .col-md-6.col-md-offset-3
+    = form_for user do |f|
+      - if user.errors.any?
+        .alert.alert-danger
+          %ul
+            - user.errors.full_messages.each do |msg|
+              %li= msg
+      .panel.panel-primary
+        .panel-heading Заповніть поля
+        .panel-body
+          .control-group
+            = f.label "Ім'я"
+            .controls
+              = f.text_field :first_name, class: 'form-control'
+          .control-group
+            = f.label "Прізвище"
+            .controls
+              = f.text_field :last_name, class: 'form-control'
+          .control-group
+            = f.label "Місто"
+            .controls
+              = f.text_field :city, class: 'form-control'
+      .panel.panel-primary
+        .panel-body
+          = f.submit 'Зберегти', class: "btn btn-lg btn-teal"

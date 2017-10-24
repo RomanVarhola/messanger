@@ -1,0 +1,14 @@
+<%if notice %>
+  <div class="alert alert-success">
+    <p id="notice"><%= notice %></p>
+  </div>
+<%end%>
+
+<p><b>First name:</b> <%= @user.first_name%></p>
+<p><b>Last name:</b> <%= @user.last_name%></p>
+<p><b>City:</b> <%= @user.city%></p>
+<% if current_user && current_user.role == "admin" %>
+  <p><b>Роль:</b> <%= @user.role%></p>
+<%end%>
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', root_path %>
