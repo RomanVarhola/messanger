@@ -1,12 +1,15 @@
 class ShowUnreadMessagesInConversation
-  attr_reader :current_user, :conversation
+  attr_reader :current_user_id, :conversation_id
 
-  def initialize(current_user, conversation)
-    @user = current_user
-    @conversation = conversation
+  def initialize(current_user_id, conversation_id)
+    @user_id = current_user_id
+    @conversation_id = conversation_id
   end
 
   def call
-    @conversation.messages.where(read: false).count
+    user = User.find(@user_id)
+    conversation = Conversation.find(@conversation_id)
+
+    conversation.messages.where(receiver_id: user.id, read: false).count
   end
 end

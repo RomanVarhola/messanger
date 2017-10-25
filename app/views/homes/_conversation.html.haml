@@ -10,12 +10,14 @@
           %a.pull-right
             = image_tag('1.png', style: "width: 40px; height: 40px;")
           .media-body.alert.alert-success
-            .pull-right
-              = link_to 'x', message_path(message), method: :delete, class: 'btn'
             %small.pull-right.time
               %i.fa.fa-clock-o
                 = message.created_at
-            %h5.media-heading= message.sender.full_name
+            %h5.media-heading
+              = message.sender.full_name
+              %small
+                = link_to 'Reply', reply_message_path(message)
+                = link_to 'Destroy', message_path(message), method: :delete
             %small.col-lg-10= message.description
       - else
         .media.msg

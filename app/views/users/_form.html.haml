@@ -7,20 +7,32 @@
             - user.errors.full_messages.each do |msg|
               %li= msg
       .panel.panel-primary
-        .panel-heading Заповніть поля
+        .panel-heading Fill all fields
         .panel-body
           .control-group
-            = f.label "Ім'я"
+            = f.label :email
+            .controls
+              = f.email_field :email, autofocus: true, class: 'form-control'
+          .control-group
+            = f.label :first_name
             .controls
               = f.text_field :first_name, class: 'form-control'
           .control-group
-            = f.label "Прізвище"
+            = f.label :last_name
             .controls
               = f.text_field :last_name, class: 'form-control'
           .control-group
-            = f.label "Місто"
+            = f.label :city
             .controls
               = f.text_field :city, class: 'form-control'
+          .control-group
+            = f.label :password
+            .controls
+              = f.password_field :password, autocomplete: "off", class: 'form-control'
+            .control-group
+            = f.label :password_confirmation
+            .controls
+              = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
       .panel.panel-primary
         .panel-body
-          = f.submit 'Зберегти', class: "btn btn-lg btn-teal"
+          = f.submit 'Save', class: "btn btn-lg btn-teal"`

@@ -1,6 +1,7 @@
 class ConversationsController < ApplicationController
   before_action :authenticate_user!
-  
+  before_action :user_blocked!
+
   def show
     @conversation = Conversation.find(params[:id])
     update_messages

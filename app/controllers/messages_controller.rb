@@ -1,33 +1,49 @@
 class MessagesController < ApplicationController
-  before_action :set_message, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :user_blocked!
+  before_action :set_message, only: [:destroy ,:reply]
 
   def new
     @message = Message.new
   end
 
-  def create #
-    @message = Message.new(message_params)
-
-    respond_to do |format|
-      if @message.save
-        format.html { redirect_to root_path, notice: 'Message was successfully created.' }
-      else
-        format.html { render :new }
-      end
+  def create
+    begin
+      CreateMessage.new(current_user, message_params).call
+      flash[:notice] = 'Message was successfully created.'
+    rescue Exception => e
+      flash[:notice] = e.message
     end
+
+    redirect_to root_path
   end
 
-  def destroy #
-    @message.destroy
-    respond_to do |format|
-      format.html { redirect_to root_path, notice: 'Message was successfully destroyed.' }
+  def destroy
+    begin
+      DestroyMessage.new(@message.id).call
+      flash[:notice] = 'Message was successfully destroyed.'
+    rescue Exception => e
+      flash[:notice] = e.message
     end
+
+    redirect_to root_path
+  end
+
+  def reply
+    begin
+      ReplyMessage.new(@message.id).call
+      flash[:notice] = 'Message was successfully replied.'
+    rescue Exception => e
+      flash[:notice] = e.message
+    end
+
+    redirect_to root_path
   end
 
   private
 
     def set_message
-      @message = Message.find(params[:id])
+      @message = Message.find_by(id: params[:id])
     end
 
     def message_params

@@ -17,6 +17,14 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def admin?
+    role == 'admin'
+  end
+
+  def blocked?
+    blocked == true
+  end
+
   private
   
   def set_default_role
