@@ -42,13 +42,13 @@
                 = f.hidden_field :body, value: 'Body'
                 = f.text_area :description, class: 'form-control', rows: '3'
                 .btn-panel
-                  = link_to 'I have read all!!!', conversation_path(conversation), class: 'btn btn-success'
                   = f.submit 'Send Message', class: 'btn btn-primary pull-right'
             .btn-panel
-              - if find_blocking(current_user, conversation.receiver)
-                = link_to "Unblock user", find_blocking(current_user, conversation.receiver), method: :delete, class: 'btn btn-danger' 
+              = link_to 'I have read all!!!', conversation_path(conversation), class: 'btn btn-success'
+              - if find_blocking(current_user, conversation.other_member(current_user))
+                = link_to "Unblock user", find_blocking(current_user, conversation.other_member(current_user)), method: :delete, class: 'btn btn-danger' 
               - else
-                = form_for(@blocking) do |f|
+                = form_for(@blocking, html:{ class: "inline-form"}) do |f|
                   = f.hidden_field :user_id, value: current_user.id
                   = f.hidden_field :blocked_user_id, value: conversation.other_member(current_user).id
                   = f.submit 'Block user', class: 'btn btn-warning'
