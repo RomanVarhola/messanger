@@ -28,7 +28,7 @@
           .control-group
             = f.label :role
             .controls
-              = f.select :role, [:user, :admin]
+              = f.select :role, [['User', :user],['Admin', :admin]]
           .control-group
             = f.label :password
             .controls

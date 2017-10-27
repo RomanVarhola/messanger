@@ -20,11 +20,11 @@
       <td><%= user.email %></td>
       <td><%= user.city %></td>
       <td>
-      <% if current_user != user %>
         <%= link_to 'Show', user, class: 'btn btn-success' %>
-        <%= link_to 'Edit', edit_user_path(user), class: 'btn btn-primary' %>
-        <%= link_to 'Remove', user, method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger' %>
-      <%end%>  
+        <% if current_user != user %>
+          <%= link_to 'Edit', edit_user_path(user), class: 'btn btn-primary' %>
+          <%= link_to 'Remove', user, method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger' %>
+        <%end%>
       </td>
       </tr>
     <% end %>
