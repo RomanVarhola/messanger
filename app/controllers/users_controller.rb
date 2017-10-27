@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_user!
-  before_action :user_blocked!
-  before_action :find_user, only: [:show, :edit, :update, :destroy, :block, :unblock]
+  before_action :find_user, only: [:show, :edit, :update, :destroy]
 
   def index
     @users = User.all
@@ -25,10 +24,9 @@ class UsersController < ApplicationController
       flash[:notice] = "User was successfully created."
     rescue Exception => e
       flash[:notice] = e.message
-      redirect_to new_user_path
     end
 
-    redirect_to user_path(@user)
+    redirect_to users_path
   end
 
   def update
@@ -55,30 +53,6 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
-  def block
-    begin
-      factory = BlockUser.new(@user)
-      factory.call
-      flash[:notice] = "User was successfully blocked."
-    rescue Exception => e
-      flash[:notice] = e.message
-    end
-
-    redirect_to users_path
-  end
-
-  def unblock
-    begin
-      factory = UnblockUser.new(@user)
-      factory.call
-      flash[:notice] = "User was successfully unblocked."
-    rescue Exception => e
-      flash[:notice] = e.message
-    end
-
-    redirect_to users_path
-  end
-
   private
     
   def find_user
@@ -86,6 +60,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :city, :email)
+    params.require(:user).permit(:first_name, :last_name, :city, :email, :role)
   end
 end

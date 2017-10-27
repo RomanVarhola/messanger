@@ -5,23 +5,20 @@ class Conversation < ApplicationRecord
 
   def other_member(current_user)
     if current_user == sender
-      full_name = receiver.full_name
+      user = receiver
     else
-      full_name = sender.full_name
+      user = sender
     end
-    full_name
+    user
   end
 
-  def other_receiver(current_user)
-    if current_user == sender
-      id = receiver.id
-    else
-      id = sender.id
-    end
-    id
-  end
-
-  def unread_messages(current_user)
+  def unread_message(current_user)
     ShowUnreadMessagesInConversation.new(current_user, self).call
+  end
+
+  def update_messages
+    messages.each do |message|
+      message.update_attribute(:read, true) if current_user == message.receiver
+    end
   end
 end

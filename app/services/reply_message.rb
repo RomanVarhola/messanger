@@ -1,18 +1,18 @@
 class ReplyMessage
-  attr_reader :message_id
+  attr_reader :message
 
-  def initialize(message_id)
-    @message_id = message_id
+  def initialize(message)
+    @message = message
   end
 
   def call
-    message = Message.find(@message_id)
-
-    message = Message.new(receiver_id: message.receiver_id,
-                          sender_id: message.sender_id,
-                          body: message.body,
-                          description: message.description
-                        )
+    if @message
+      message = Message.new(receiver_id: @message.receiver_id,
+                            sender_id: @message.sender_id,
+                            body: @message.body,
+                            description: @message.description
+                          )
+    end
     if message.valid?
       message.save
     else

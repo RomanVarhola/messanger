@@ -26,6 +26,10 @@
             .controls
               = f.text_field :city, class: 'form-control'
           .control-group
+            = f.label :role
+            .controls
+              = f.select :role, [:user, :admin]
+          .control-group
             = f.label :password
             .controls
               = f.password_field :password, autocomplete: "off", class: 'form-control'
@@ -35,4 +39,4 @@
               = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
       .panel.panel-primary
         .panel-body
-          = f.submit 'Save', class: "btn btn-lg btn-teal"`
+          = f.submit 'Save', class: "btn btn-block btn-primary"

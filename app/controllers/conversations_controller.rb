@@ -1,12 +1,12 @@
 class ConversationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :user_blocked!
 
   def show
     @conversation = Conversation.find(params[:id])
     update_messages
-    
-    respond_to { |format| format.js }
+
+    flash[:notice] = 'You have read messages.'
+    redirect_to root_path
   end
 
   private

@@ -1,6 +1,5 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
-  before_action :user_blocked!
   before_action :set_message, only: [:destroy ,:reply]
 
   def new
@@ -11,16 +10,16 @@ class MessagesController < ApplicationController
     begin
       CreateMessage.new(current_user, message_params).call
       flash[:notice] = 'Message was successfully created.'
+      redirect_to root_path
     rescue Exception => e
       flash[:notice] = e.message
+      redirect_to new_message_path
     end
-
-    redirect_to root_path
   end
 
   def destroy
     begin
-      DestroyMessage.new(@message.id).call
+      DestroyMessage.new(@message).call
       flash[:notice] = 'Message was successfully destroyed.'
     rescue Exception => e
       flash[:notice] = e.message
@@ -31,7 +30,7 @@ class MessagesController < ApplicationController
 
   def reply
     begin
-      ReplyMessage.new(@message.id).call
+      ReplyMessage.new(@message).call
       flash[:notice] = 'Message was successfully replied.'
     rescue Exception => e
       flash[:notice] = e.message

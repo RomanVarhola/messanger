@@ -6,30 +6,24 @@
   .row
     .col-lg-3
       .btn-panel.btn-panel-conversation
-        %a.btn.col-lg-6.send-message-btn{:href => "", :role => "button"}
-          %i.fa.fa-search
-          Search
         = link_to 'New message', new_message_path, class: 'btn btn-primary col-lg-6 send-message-btn'
-    .col-lg-offset-1.col-lg-7
-      .btn-panel.btn-panel-msg
-        %a.btn.col-lg-3.send-message-btn.pull-right{:href => "", :role => "button"}
-          %i.fa.fa-gears
-          Settings
   %hr
-  - if @conversations.present?
-    .row
-      .conversation-wrap.col-lg-3
+.row
+  .col-lg-3
+    - if @conversations.present?
+      %ul.nav.nav-pills.nav-stacked
         - @conversations.each do |conversation|
-          - if conversation.messages.present?
+          %li.active
             .media.conversation
-              %a.pull-left{:href => "#"}
+              %a.pull-left{ :href => "#"}
                 = image_tag('1.png', style: "width: 50px; height: 50px;")
-              - if unread_messages > 0
-                %h4.unread-messages.pull-right= unread_messages
+              - if conversation.unread_message(current_user) > 0
+                %h4.unread-messages.pull-right= conversation.unread_message(current_user)
               .media-body
                 %h4.media-heading
-                = link_to "#{conversation.sender.full_name}", conversation_path(conversation), remote: true
+                %a.pull-left{"data-toggle" => "tab", :href => "#conversation_#{conversation.id}"}
+                  = conversation.sender.full_name
                 %br
                 %small= conversation.messages.last.description
-      .col-lg-8
-        .message-wrap
+          %hr
+  = render partial: 'homes/conversation'

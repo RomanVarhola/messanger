@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get 'reply'
     end
   end
+  resources :blockings, only: [:create, :index, :destroy]
   resources :homes, only: [:index]
   devise_for :users
   resources :users do

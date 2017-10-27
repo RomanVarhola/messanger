@@ -1,0 +1,18 @@
+%h1 Blocked Users
+- if @blockings.present?
+  %table.table.table-bordered
+    %thead
+      %tr.info
+        %th #
+        %th Full name
+        %th Email
+        %th City
+        %th 
+    %tbody
+      - @blockings.each do |blocking|
+        %tr
+          %td= blocking.blocked_user.id
+          %td= blocking.blocked_user.full_name
+          %td= blocking.blocked_user.email
+          %td= blocking.blocked_user.city
+          %td= link_to "Unblock user", blocking, method: :delete, class: 'btn btn-danger'

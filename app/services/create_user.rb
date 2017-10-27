@@ -7,9 +7,9 @@ class CreateUser
 
   def call
     @user = User.new(@params)
-    
-    @user = User.create(@params)
+
     if @user.valid?
+      user = User.new(@params)
       user.save!
     else
       raise(NotValidEntryRecord, @user.errors.full_messages.to_sentence)
