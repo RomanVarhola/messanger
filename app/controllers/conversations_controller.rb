@@ -1,7 +1,7 @@
 class ConversationsController < ApplicationController
   before_action :authenticate_user!
 
-  def show
+  def read
     @conversation = Conversation.find(params[:id])
     update_messages
 

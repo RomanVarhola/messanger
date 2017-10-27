@@ -44,7 +44,7 @@
                 .btn-panel
                   = f.submit 'Send Message', class: 'btn btn-primary pull-right'
             .btn-panel
-              = link_to 'I have read all!!!', conversation_path(conversation), class: 'btn btn-success'
+              = link_to 'I have read all!!!', read_conversation_path(conversation), method: :post,class: 'btn btn-success'
               - if find_blocking(current_user, conversation.other_member(current_user))
                 = link_to "Unblock user", find_blocking(current_user, conversation.other_member(current_user)), method: :delete, class: 'btn btn-danger' 
               - else

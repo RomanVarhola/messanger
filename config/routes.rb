@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :conversations, only: [:show]
+  resources :conversations do
+    member do
+      post 'read'
+    end
+  end
   resources :messages, only: [:create, :new, :destroy] do
     member do
       get 'reply'
