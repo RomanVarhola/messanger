@@ -5,8 +5,8 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
 
-  has_many :blockings
-  has_many :blockings, foreign_key: 'blocked_user_id'
+  has_many :blocked_users, foreign_key: 'user_id', class_name: 'Blocking'
+  has_many :as_blocked_users, foreign_key: 'blocked_user_id', class_name: 'Blocking'
   has_many :created_conversations, foreign_key: 'sender_id', class_name: 'Conversation'
   has_many :member_conversations, foreign_key: 'receiver_id', class_name: 'Conversation'
   has_many :received_conversations, foreign_key: 'recipient_id'

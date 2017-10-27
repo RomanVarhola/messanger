@@ -17,7 +17,9 @@
 //= require_tree .
 
 $(document).ready(function(){
-  $('#message_receiver_id').selectize();
+  $('#message_receiver_id').selectize({
+    sortField: 'text'
+  });
   $('#user_role').selectize();
   $("#message-scroll").animate({ scrollTop: $(document).height() }, "slow");
 });

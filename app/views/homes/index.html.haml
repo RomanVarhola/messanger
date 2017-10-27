@@ -10,20 +10,21 @@
   %hr
 .row
   .col-lg-3
-    - if @conversations.present?
-      %ul.nav.nav-pills.nav-stacked
-        - @conversations.each do |conversation|
-          %li.active
-            .media.conversation
-              %a.pull-left{ :href => "#"}
-                = image_tag('1.png', style: "width: 50px; height: 50px;")
-              - if conversation.unread_message(current_user) > 0
-                %h4.unread-messages.pull-right= conversation.unread_message(current_user)
-              .media-body
-                %h4.media-heading
-                %a.pull-left{"data-toggle" => "tab", :href => "#conversation_#{conversation.id}"}
-                  = conversation.sender.full_name
-                %br
-                %small= conversation.messages.last.description
-          %hr
+    #conversation-scroll
+      - if @conversations.present?
+        %ul.nav.nav-pills.nav-stacked
+          - @conversations.each do |conversation|
+            %li.active
+              .media.conversation
+                %a.pull-left{ :href => "#"}
+                  = image_tag('1.png', style: "width: 50px; height: 50px;")
+                - if conversation.unread_message(current_user) > 0
+                  %h4.unread-messages.pull-right= conversation.unread_message(current_user)
+                .media-body
+                  %h4.media-heading
+                  %a.pull-left{"data-toggle" => "tab", :href => "#conversation_#{conversation.id}"}
+                    = conversation.sender.full_name
+                  %br
+                  %small= conversation.messages.last.description
+            %hr
   = render partial: 'homes/conversation'

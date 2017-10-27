@@ -21,7 +21,7 @@
           .control-group
             = f.label :receiver
             .controls
-              = f.collection_select :receiver_id, User.where.not(id: current_user.id), :id, :full_name, html_options: { class: 'form-control'}
+              = f.select :receiver_id, User.where.not(id: [@blocking, current_user.id].flatten).collect{ |p| [p.full_name, p.id] }, { include_blank: true, class: 'form-control'}
       .panel.panel-primary
         .panel-body
           = f.submit 'Send', class: "btn btn-block btn-primary"

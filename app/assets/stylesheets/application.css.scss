@@ -25,6 +25,11 @@
   overflow-y: scroll;
 }
 
+#conversation-scroll {
+  max-height: 350px;
+  overflow-y: scroll;
+}
+
 .inline-form {
   display: inline;
 }

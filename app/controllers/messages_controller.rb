@@ -4,6 +4,7 @@ class MessagesController < ApplicationController
 
   def new
     @message = Message.new
+    @blocking = AsBlockedUser.new(current_user: current_user).blocking
   end
 
   def create
