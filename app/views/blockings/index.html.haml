@@ -16,3 +16,5 @@
           %td= blocking.blocked_user.email
           %td= blocking.blocked_user.city
           %td= link_to "Unblock user", blocking, method: :delete, class: 'btn btn-danger'
+- else
+  .alert.alert-danger You haven't blocked users
