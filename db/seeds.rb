@@ -7,17 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 p 'Seeding started..'
-  DatabaseCleaner.clean_with(:truncation, :only => ['users'])
   
-  p 'Cleaning tables complete..'
-  
-  #p 'Creating roles..'
-
-  #['registered', 'admin'].each do |role|
-	# Role.find_or_create_by({name: role})
-	#end
-
-	p 'Creating admin..'
+  p 'Creating admin..'
 
   pass = '12345678'
   User.create!(
