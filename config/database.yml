@@ -1,20 +1,30 @@
-# DO NOT EDIT
-# We have separate place in hell for those who trying to edit this file
-
-default: &default
-  adapter: mysql2
-  encoding: utf8
-  database: tickets
-  host: localhost
-  pool: 5
-  username: root
-  password: 12345678
-
 development:
-  <<: *default
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: tickets_development
+  pool:     5
+  username: postgres
+  password: 'password'
+  template: template0
 
+  
 test:
-  <<: *default
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: tickets_test
+  pool:     5
+  username: postgres
+  password: 'password'
+  template: template0
 
 production:
-  <<: *default
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: tickets_production
+  pool:     5
+  username: postgres
+  password: 'password'
+  template: template0

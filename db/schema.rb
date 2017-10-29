@@ -13,18 +13,21 @@
 
 ActiveRecord::Schema.define(version: 20171026232855) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "blockings", force: :cascade do |t|
-    t.integer  "user_id",         limit: 4
-    t.integer  "blocked_user_id", limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "user_id"
+    t.integer  "blocked_user_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "conversations", force: :cascade do |t|
-    t.integer  "sender_id",   limit: 4
-    t.integer  "receiver_id", limit: 4
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "homes", force: :cascade do |t|
@@ -33,33 +36,33 @@ ActiveRecord::Schema.define(version: 20171026232855) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.string   "body",            limit: 255
-    t.text     "description",     limit: 65535
-    t.integer  "receiver_id",     limit: 4
-    t.integer  "sender_id",       limit: 4
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
-    t.integer  "conversation_id", limit: 4
-    t.boolean  "read",                          default: false
+    t.string   "body"
+    t.text     "description"
+    t.integer  "receiver_id"
+    t.integer  "sender_id"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "conversation_id"
+    t.boolean  "read",            default: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
-    t.string   "first_name",             limit: 255
-    t.string   "last_name",              limit: 255
-    t.string   "city",                   limit: 255
-    t.string   "role",                   limit: 255
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "city"
+    t.string   "role"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
