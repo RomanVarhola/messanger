@@ -1,4 +1,4 @@
-class AsBlockedUser
+class BlockingUser
   attr_accessor :options
 
   def initialize(args)

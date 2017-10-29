@@ -3,7 +3,7 @@ class BlockingsController < ApplicationController
   before_action :set_blocking, only: [:destroy]
 
   def index
-    @blockings = Blocking.where(user_id: current_user).includes(:user).all
+    @blockings = BlockingUser.new(current_user: current_user).blocked_users
   end
 
   def create
